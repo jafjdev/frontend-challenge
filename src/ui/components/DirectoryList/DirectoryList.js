@@ -69,7 +69,7 @@ export default function DirectoryList({ offerList, ...props }) {
     const [page, setPage] = React.useState(0);
 
     useEffect(() => {
-        offerList(1).then(response => {
+        offerList().then(response => {
             setData(response.data);
         });
     }, []);
@@ -91,7 +91,7 @@ export default function DirectoryList({ offerList, ...props }) {
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-        offerList(page).then(response => {
+        offerList(newPage).then(response => {
             setData(response.data);
         });
     };
