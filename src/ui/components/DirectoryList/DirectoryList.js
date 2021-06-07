@@ -66,7 +66,7 @@ export default function DirectoryList({ offerList, ...props }) {
     const [order, setOrder] = React.useState("asc");
     const [orderBy, setOrderBy] = React.useState("calories");
     const [selected, setSelected] = React.useState([]);
-    const [page, setPage] = React.useState(0);
+    const [page, setPage] = React.useState(1);
 
     useEffect(() => {
         offerList().then(response => {
@@ -90,8 +90,9 @@ export default function DirectoryList({ offerList, ...props }) {
     };
 
     const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-        offerList(newPage).then(response => {
+        const page = newPage + 1;
+        setPage(page);
+        offerList(page).then(response => {
             setData(response.data);
         });
     };
@@ -147,7 +148,7 @@ export default function DirectoryList({ offerList, ...props }) {
                             data.pages * process.env.REACT_APP_DEFAULT_ELEMENTS
                         }
                         rowsPerPage={process.env.REACT_APP_DEFAULT_ELEMENTS}
-                        page={page}
+                        page={page - 1}
                         onChangePage={handleChangePage}
                     />
                 </Paper>
